@@ -4,6 +4,10 @@
 
 The player moves through a small morning routine: finding glasses, making tea, taking medication, looking at a photo, calling someone familiar, and leaving for an appointment. As recall softens, object labels and room cues become less certain. Support tools such as notes, labels, and calm prompts make the apartment easier to read again.
 
+[Play Soft Recall](https://siamakenna.github.io/soft-recall-game/)
+
+https://github.com/siamakenna/soft-recall-game/raw/main/media/soft-recall-trailer.mp4
+
 ## Prototype Focus
 
 - Working title and interface: **Soft Recall**
