@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -100,9 +100,48 @@
 }
 
 @utility ink-vignette {
+  /* Simulates a slightly-below-average visual field:
+     ~usable central cone, softly darkened periphery, hard black frame
+     so you only see what a person could reasonably focus on. */
   box-shadow:
-    inset 0 0 120px 12px oklch(0 0 0 / 45%),
-    inset 0 0 40px 4px oklch(0 0 0 / 30%);
+    inset 0 0 260px 60px oklch(0 0 0 / 82%),
+    inset 0 0 90px 10px oklch(0 0 0 / 55%),
+    inset 0 0 30px 2px oklch(0 0 0 / 40%);
+}
+@utility vision-mask {
+  background: radial-gradient(
+    ellipse 62% 62% at 50% 52%,
+    transparent 55%,
+    oklch(0 0 0 / 45%) 78%,
+    oklch(0 0 0 / 88%) 100%
+  );
+}
+
+/* Rich Studio-Ghibli-inspired greenery: layered painterly leaves in every
+   corner + a trailing vine, plus a warm moss wash. Kept as soft-light so it
+   sits on top of the existing art instead of replacing it. */
+@utility ghibli-foliage {
+  mix-blend-mode: soft-light;
+  background-color: transparent;
+  background-image:
+    /* top-left cluster */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='%232f5d3a' opacity='0.9'><path d='M0,0 C70,15 110,55 120,110 C80,80 30,70 0,90 Z'/><path d='M0,0 C50,40 25,80 0,80 Z'/><ellipse cx='40' cy='25' rx='30' ry='10' transform='rotate(20 40 25)'/><ellipse cx='90' cy='60' rx='24' ry='8' transform='rotate(-15 90 60)'/><ellipse cx='60' cy='90' rx='20' ry='7' transform='rotate(40 60 90)'/><circle cx='105' cy='40' r='5' fill='%23c2a35a'/><circle cx='30' cy='70' r='4' fill='%23e8c26a'/></g></svg>"),
+    /* top-right cluster */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='%23264d2d' opacity='0.88'><path d='M200,0 C130,15 90,55 80,110 C120,80 170,70 200,90 Z'/><ellipse cx='160' cy='35' rx='32' ry='11' transform='rotate(-25 160 35)'/><ellipse cx='130' cy='70' rx='22' ry='8' transform='rotate(20 130 70)'/><ellipse cx='150' cy='100' rx='18' ry='7' transform='rotate(-40 150 100)'/><circle cx='185' cy='55' r='5' fill='%23c2a35a'/><circle cx='120' cy='45' r='4' fill='%23e08a5a'/></g></svg>"),
+    /* bottom-left cluster */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='%231f3f24' opacity='0.85'><path d='M0,200 C70,185 110,145 120,90 C80,120 30,130 0,110 Z'/><ellipse cx='50' cy='170' rx='34' ry='11' transform='rotate(-20 50 170)'/><ellipse cx='95' cy='150' rx='22' ry='8'/><ellipse cx='30' cy='140' rx='18' ry='6' transform='rotate(30 30 140)'/><circle cx='75' cy='180' r='4' fill='%23e8c26a'/></g></svg>"),
+    /* bottom-right cluster */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='%23294a2a' opacity='0.88'><path d='M200,200 C130,185 90,145 80,90 C120,120 170,130 200,110 Z'/><ellipse cx='150' cy='170' rx='30' ry='10' transform='rotate(25 150 170)'/><ellipse cx='110' cy='150' rx='22' ry='8' transform='rotate(-10 110 150)'/><circle cx='140' cy='185' r='4' fill='%23e08a5a'/><circle cx='170' cy='150' r='3' fill='%23c2a35a'/></g></svg>"),
+    /* trailing vine down the left edge */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 400' preserveAspectRatio='none'><g fill='%232f5d3a' opacity='0.7'><path d='M20,0 C10,60 30,120 20,180 C10,240 30,300 20,400' stroke='%232f5d3a' stroke-width='2' fill='none'/><ellipse cx='28' cy='50' rx='14' ry='5' transform='rotate(30 28 50)'/><ellipse cx='12' cy='110' rx='14' ry='5' transform='rotate(-30 12 110)'/><ellipse cx='28' cy='180' rx='14' ry='5' transform='rotate(30 28 180)'/><ellipse cx='12' cy='250' rx='14' ry='5' transform='rotate(-30 12 250)'/><ellipse cx='28' cy='320' rx='14' ry='5' transform='rotate(30 28 320)'/></g></svg>"),
+    /* trailing vine down the right edge */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 400' preserveAspectRatio='none'><g fill='%23264d2d' opacity='0.7'><path d='M40,0 C50,60 30,120 40,180 C50,240 30,300 40,400' stroke='%23264d2d' stroke-width='2' fill='none'/><ellipse cx='32' cy='60' rx='14' ry='5' transform='rotate(-30 32 60)'/><ellipse cx='48' cy='130' rx='14' ry='5' transform='rotate(30 48 130)'/><ellipse cx='32' cy='200' rx='14' ry='5' transform='rotate(-30 32 200)'/><ellipse cx='48' cy='270' rx='14' ry='5' transform='rotate(30 48 270)'/><ellipse cx='32' cy='340' rx='14' ry='5' transform='rotate(-30 32 340)'/></g></svg>"),
+    /* soft warm-green wash */
+    radial-gradient(ellipse 90% 70% at 50% 55%, oklch(0.50 0.10 145 / 18%), transparent 70%),
+    linear-gradient(180deg, oklch(0.38 0.09 145 / 10%), oklch(0.28 0.07 150 / 18%));
+  background-repeat: no-repeat;
+  background-position: top left, top right, bottom left, bottom right, left center, right center, center, center;
+  background-size: 34% 34%, 34% 34%, 34% 34%, 34% 34%, 6% 100%, 6% 100%, cover, cover;
 }
 
 /* Fine SVG film grain — subtle, animated */
@@ -121,6 +160,15 @@
   60%  { transform: translate(-2%, -2%); }
   80%  { transform: translate(3%, 1%); }
   100% { transform: translate(0, 0); }
+}
+
+@keyframes hotspot-arrow-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.75; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+@utility hotspot-arrow {
+  animation: hotspot-arrow-bob 1.6s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 @utility marker-glow {
@@ -168,4 +216,180 @@
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: scale(1.15) rotate(0deg); }
+  25%      { transform: scale(1.17) rotate(-2deg); }
+  75%      { transform: scale(1.17) rotate(2deg); }
+}
+@keyframes hs-fill {
+  from { stroke-dashoffset: 94.25; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Foliage gently sways — small rotate to feel painterly */
+@keyframes foliage-sway {
+  0%, 100% { transform: translate(0,0) rotate(0deg); }
+  50%      { transform: translate(0.4%, -0.3%) rotate(0.4deg); }
+}
+@utility ghibli-foliage-sway {
+  animation: foliage-sway 11s ease-in-out infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Dust motes — tiny sparkles drifting in light beams */
+@keyframes dust-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-40px, -160px, 0); }
+}
+@utility dust-motes {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,240,200,0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 40% 70%, rgba(255,240,200,0.7) 0 1px, transparent 2px),
+    radial-gradient(circle at 60% 90%, rgba(255,240,200,0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 75%, rgba(255,240,200,0.6) 0 1px, transparent 2px),
+    radial-gradient(circle at 15% 55%, rgba(255,240,200,0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 40%, rgba(255,240,200,0.7) 0 1px, transparent 2px);
+  background-size: 220px 300px;
+  animation: dust-drift 22s linear infinite;
+}
+
+/* Steam plume in front of the kettle */
+@keyframes steam-rise {
+  0%   { transform: translateY(0) scale(1);   opacity: 0; }
+  30%  { opacity: 0.6; }
+  100% { transform: translateY(-140px) scale(1.6); opacity: 0; }
+}
+@utility steam-plume {
+  position: absolute;
+  width: 60px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5), transparent 70%);
+  filter: blur(6px);
+  animation: steam-rise 4s ease-out infinite;
+  pointer-events: none;
+}
+
+/* --- Ambient scene motion (no interaction required) --- */
+
+/* Curtain billow: a soft cream drape that bows in and out */
+@keyframes curtain-billow {
+  0%, 100% { transform: translateX(0) skewX(0deg) scaleX(1); opacity: 0.28; }
+  50%      { transform: translateX(3%) skewX(-3deg) scaleX(1.04); opacity: 0.42; }
+}
+@utility ambient-curtain {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,248,230,0.55), rgba(255,240,210,0.15) 60%, transparent);
+  border-radius: 40% 40% 20% 20% / 60% 60% 20% 20%;
+  filter: blur(6px);
+  mix-blend-mode: soft-light;
+  transform-origin: top center;
+  animation: curtain-billow 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@utility ambient-curtain-delay {
+  animation-delay: -3.5s;
+  animation-duration: 8.5s;
+}
+
+/* Light shaft: a slow, breathing beam through a window */
+@keyframes light-shaft {
+  0%, 100% { opacity: 0.25; transform: translateX(0) scaleY(1); }
+  50%      { opacity: 0.45; transform: translateX(1%) scaleY(1.03); }
+}
+@utility ambient-light-shaft {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,235,180,0.55), rgba(255,225,160,0.15) 55%, transparent);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  transform-origin: top center;
+  animation: light-shaft 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Door glow: front door light softly breathing */
+@keyframes door-glow {
+  0%, 100% { opacity: 0.22; }
+  50%      { opacity: 0.40; }
+}
+@utility ambient-door-glow {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255,220,160,0.6), transparent 70%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  animation: door-glow 6s ease-in-out infinite;
+}
+
+/* Sway: a plant/leaf area that gently rocks */
+@keyframes ambient-sway-kf {
+  0%, 100% { transform: rotate(-1.2deg) translateY(0); }
+  50%      { transform: rotate(1.2deg) translateY(-0.4%); }
+}
+@utility ambient-sway {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 60%, rgba(80,140,80,0.25), transparent 70%);
+  filter: blur(5px);
+  mix-blend-mode: soft-light;
+  transform-origin: 50% 100%;
+  animation: ambient-sway-kf 8s ease-in-out infinite;
+  will-change: transform;
+}
+@utility ambient-sway-delay {
+  animation-delay: -4s;
+  animation-duration: 10s;
+}
+
+/* Chromatic aberration overlay — driven by --aber (0..1) */
+@utility chromatic-aberration {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: var(--aber, 0);
+  background:
+    linear-gradient(90deg,
+      rgba(255,60,90,0.35) 0%,
+      rgba(255,60,90,0)   6%,
+      rgba(60,180,255,0)  94%,
+      rgba(60,180,255,0.35) 100%);
+  transition: opacity 500ms ease-out;
+}
+
+/* Screen-tear stripes — appear only under heavy dissonance */
+@keyframes tear-shift {
+  0%,100% { transform: translateX(0); }
+  50%     { transform: translateX(3px); }
+}
+@utility screen-tear {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: var(--tear, 0);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 22px,
+    rgba(255,255,255,0.04) 22px 23px,
+    transparent 23px 46px
+  );
+  animation: tear-shift 90ms steps(2) infinite;
+  mix-blend-mode: overlay;
+  transition: opacity 400ms ease-out;
+}
+
+/* Custom painterly cursors */
+.cursor-open  { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><circle cx='14' cy='14' r='11' fill='none' stroke='rgba(255,230,170,0.9)' stroke-width='1.4'/><circle cx='14' cy='14' r='2' fill='rgba(255,230,170,0.9)'/></svg>") 14 14, default; }
+.cursor-inspect { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='14' cy='14' r='10' fill='none' stroke='rgba(255,230,170,1)' stroke-width='2'/><line x1='22' y1='22' x2='28' y2='28' stroke='rgba(255,230,170,1)' stroke-width='2' stroke-linecap='round'/></svg>") 14 14, pointer; }
+
+/* Dyslexia-friendly font fallback stack (no download; uses system OpenDyslexic if installed, else Comic Sans / Verdana) */
+.dyslexia-font, .dyslexia-font * {
+  font-family: "OpenDyslexic", "Comic Sans MS", "Verdana", sans-serif !important;
+  letter-spacing: 0.02em;
 }
